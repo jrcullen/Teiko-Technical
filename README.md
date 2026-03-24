@@ -49,3 +49,41 @@ The dashboard provides interactive access to:
 - Summary table (Part 2)
 - Responders vs non-responders comparison (Part 3)
 - Baseline subset analysis (Part 4)
+
+# Database Schema Design
+The relational database consists of two main tables:
+
+1. samples Table
+| Column | Type | Description |
+|------|------------|------------|
+| sample_id | TEXT (Primary Key) | Unique identifier for each sample |
+| project | TEXT | Project the sample belongs to |
+| subject | TEXT | Patient/subject identifier |
+| condition | TEXT | Disease type |
+| age | INTEGER | Age of subject |
+| sex | TEXT | Biological sex |
+| treatment | TEXT | Treatment administered |
+| response | TEXT | Response to treatment (yes/no) |
+| sample | TEXT | Original sample identifier |
+| sample_type | TEXT | Sample type |
+| time_from_treatment_start | INTEGER | Timepoint of sample collection |
+
+2. cell_counts Table
+| Column | Type | Description |
+|------|------------|------------|
+| id | INTEGER (Primary Key) | Auto-incremented row ID |
+| sample_id | TEXT (Foreign Key) | Links to samples Table |
+| b_cell | INTEGER | B cell count |
+| cd8_t_cell | INTEGER | CD8 T cell count |
+| cd4_t_cell | INTEGER | CD4 T cell count |
+| nk_cell | INTEGER | NK cell count |
+| monocyte | INTEGER | Monocyte count |
+
+Design Rationale:
+
+The database schema follows a normalized relational design by separating sample metadata and cell population counts into two tables. This makes sure that patient and sample information is only stored once, while cell measurements are linked through a foreign key relationship. This structure improves data integrity, simplifies updates, and makes queries more efficient and easier to understand, especially when joining metadata with cell count information for downstream analysis.
+
+Scalability Considerations:
+
+The schema would scale effectively if the dataset grew to include hundreds of projects and thousands of samples. New data could be added by just inserting additional rows without needing schema changes. Some other analytics that would be good to perform include longitudinal analyses to track how immune cell populations change over time within the same patient, because the time_from_treatment_start field enables timepoint comparisons. Cohort based analyses such as filtering by condition, treatment, or sample type, would also be useful for identifying trends across specific patient groups. Predictive modeling could also be performed using the cell population data to identify features associated with treatment response, since the structured format allows easy extraction of features for machine learning. If more cell types or measurements were introduced, the schema could be extended to support more flexible data structures, enabling even more advanced analyses in the future.
+
