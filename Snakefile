@@ -1,26 +1,26 @@
 rule all:
     input:
-        "cell_data.db",
-        "summary.csv",
-        "stats.csv",
-        "boxplot.png",
-        "subset_data.csv"
+        "database/cell_data.db",
+        "outputs/summary.csv",
+        "outputs/stats.csv",
+        "outputs/boxplot.png",
+        "outputs/subset_data.csv"
 
 rule load_data:
     input:
-        "cell-count.csv"
+        "data/cell-count.csv"
     output:
-        "cell_data.db"
+        "database/cell_data.db"
     shell:
-        "python load_data.py"
+        "python analysis/load_data.py"
 
 rule run_analysis:
     input:
-        db="cell_data.db"
+        db="database/cell_data.db"
     output:
-        summary="summary.csv",
-        stats="stats.csv",
-        boxplot="boxplot.png",
-        subset="subset_data.csv"
+        summary="outputs/summary.csv",
+        stats="outputs/stats.csv",
+        boxplot="outputs/boxplot.png",
+        subset="outputs/subset_data.csv"
     shell:
-        "python analysis.py"
+        "python analysis/analysis.py"

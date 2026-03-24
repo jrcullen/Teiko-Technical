@@ -3,10 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import mannwhitneyu
 
-DB_NAME = "cell_data.db"
-OUTPUT_FILE = "summary.csv"
-STATS_FILE = "stats.csv"
-PLOT_FILE = "boxplot.png"
+DB_NAME = "database/cell_data.db"
+OUTPUT_FILE = "outputs/summary.csv"
+STATS_FILE = "outputs/stats.csv"
+PLOT_FILE = "outputs/boxplot.png"
+SUBSET_FILE = "outputs/subset_data.csv"
 
 
 def load_data(conn):
@@ -178,7 +179,8 @@ def subset_analysis(df):
     print()
 
     # save results
-    subset.to_csv("subset_data.csv", index=False)
+    subset.to_csv(SUBSET_FILE, index=False)
+    
 
 def main():
     conn = sqlite3.connect(DB_NAME)

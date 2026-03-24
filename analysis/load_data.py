@@ -1,10 +1,9 @@
 import sqlite3
 import pandas as pd
-import os
 
 # File paths
-DB_NAME = "cell_data.db"
-CSV_FILE = "cell-count.csv"
+DB_NAME = "database/cell_data.db"
+CSV_FILE = "data/cell-count.csv"
 
 def create_connection():
     return sqlite3.connect(DB_NAME)
