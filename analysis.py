@@ -16,10 +16,14 @@ def load_data(conn):
     query = """
     SELECT 
         s.sample_id AS sample,
+        s.project,
+        s.subject,
         s.condition,
         s.treatment,
         s.response,
+        s.sex,
         s.sample_type,
+        s.time_from_treatment_start,
         c.b_cell,
         c.cd8_t_cell,
         c.cd4_t_cell,
@@ -28,7 +32,7 @@ def load_data(conn):
     FROM samples s
     JOIN cell_counts c
     ON s.sample_id = c.sample_id
-    """
+"""
     return pd.read_sql(query, conn)
 
 # Part 2
@@ -123,6 +127,58 @@ def statistical_analysis(summary_df):
     print(f"Stats saved to {STATS_FILE}")
     print(f"Boxplot saved to {PLOT_FILE}")
 
+# Part 4
+def subset_analysis(df):
+    """
+    Part 4: Subset analysis for baseline melanoma PBMC samples treated with miraclib
+    """
+
+    subset = df[
+        (df["condition"] == "melanoma") &
+        (df["treatment"] == "miraclib") &
+        (df["sample_type"] == "PBMC") &
+        (df["time_from_treatment_start"] == 0)
+    ]
+
+    print("\n--- Part 4 Results ---\n")
+
+    # Samples per project
+    samples_per_project = subset.groupby("project")["sample"].nunique()
+    print("Samples per project:")
+    print(samples_per_project)
+    print()
+
+    # Responders vs Non-Responders (by subject)
+    response_counts = subset.groupby("response")["subject"].nunique()
+    print("Subjects (Responders vs Non-Responders):")
+    print(response_counts)
+    print()
+
+    # Males vs Females (by subject)
+    sex_counts = subset.groupby("sex")["subject"].nunique()
+    print("Subjects (Male vs Female):")
+    print(sex_counts)
+    print()
+
+    # Avg B cells (melanoma males, responders, time=0)
+    male_responders = subset[
+        (subset["sex"] == "M") &
+        (subset["response"] == "yes")
+    ]
+
+    avg_b_cells = male_responders["b_cell"].mean()
+
+    if pd.notna(avg_b_cells):
+        avg_b_cells = round(avg_b_cells, 2)
+    else:
+        avg_b_cells = None
+
+    print("Average B cells (Melanoma, Male, Responders, t=0):")
+    print(avg_b_cells)
+    print()
+
+    # save results
+    subset.to_csv("subset_data.csv", index=False)
 
 def main():
     conn = sqlite3.connect(DB_NAME)
@@ -137,6 +193,9 @@ def main():
 
     # Part 3
     statistical_analysis(summary_df)
+
+    # Part 4
+    subset_analysis(df)
 
     conn.close()
 
