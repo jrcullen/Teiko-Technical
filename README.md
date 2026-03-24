@@ -2,21 +2,24 @@
 Helping Bob understand how his drug candidate affects immune cell populations.
 
 # Setup the Environment
-This project uses a Conda environment defined in env/environment.yml.
-Run:
-'''bash
-make setup
-'''
+This project uses a Conda environment defined in env/environment.yml. First, run:
 
-Then activate the environment:
+```bash
+make setup
+```
+
+Then activate the environment using:
+
+```bash
 conda activate teiko
+```
 
 # Run the Full Data Pipeline
 To execute the entire pipeline (Parts 1–4), run:
 
-'''bash
+```bash
 make pipeline
-'''
+```
 
 This will:
 
@@ -26,17 +29,17 @@ This will:
 
 | File | Description |
 |------|------------|
-| outputs/summary.csv | Relative frequency table (Part 2) |
-| outputs/stats.csv | Statistical test results (Part 3) |
-| outputs/boxplot.png | Boxplot visualization (Part 3) |
-| outputs/subset_data.csv | Filtered subset data (Part 4) |
+| outputs/summary.csv | Relative frequency table for each cell population (Part 2) |
+| outputs/stats.csv | Statistical test results (Mann–Whitney U test) (Part 3) |
+| outputs/boxplot.png | Boxplot comparing responders vs non-responders (Part 3) |
+| outputs/subset_data.csv | Filtered baseline melanoma PBMC dataset (Part 4) |
 
 # Launch the Interactive Dashboard
 To start the Streamlit dashboard:
 
-'''bash
+```bash
 make dashboard
-'''
+```
 
 Then open a browser and go to:
 http://localhost:8501
