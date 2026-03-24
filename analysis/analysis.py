@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import mannwhitneyu
 
-DB_NAME = "database/cell_data.db"
+DB_NAME = "cell_data.db"
 OUTPUT_FILE = "outputs/summary.csv"
 STATS_FILE = "outputs/stats.csv"
 PLOT_FILE = "outputs/boxplot.png"
