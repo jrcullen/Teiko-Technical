@@ -16,7 +16,7 @@ rule load_data:
 
 rule run_analysis:
     input:
-        db="cell_data.db"
+        "cell_data.db"
     output:
         summary="outputs/summary.csv",
         stats="outputs/stats.csv",

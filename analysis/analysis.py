@@ -2,6 +2,10 @@ import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.stats import mannwhitneyu
+import os
+
+# Suppress Qt platform plugin warnings
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
 
 DB_NAME = "cell_data.db"
 OUTPUT_FILE = "outputs/summary.csv"

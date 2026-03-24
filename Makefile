@@ -1,4 +1,5 @@
 # Makefile
+.PHONY: setup pipeline dashboard
 
 # Setup target: creates the conda environment
 setup:
@@ -10,4 +11,5 @@ pipeline:
 
 # Dashboard target: starts the interactive Streamlit dashboard
 dashboard:
-	streamlit run dashboard/dashboard.py
+	streamlit run dashboard/dashboard_app.py
+	
