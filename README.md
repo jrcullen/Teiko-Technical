@@ -41,7 +41,7 @@ To start the Streamlit dashboard:
 make dashboard
 ```
 
-After running `make dashboard`, open the forwarded URL provided by Streamlit (e.g., `http://localhost:8501`) in your browser.
+After running `make dashboard`, open the forwarded URL provided by Streamlit (such as: http://localhost:8501) in your browser.
 
 The dashboard provides interactive access to:
 
@@ -93,6 +93,6 @@ The project separates data management, analysis, and visualization to ensure cla
 - load_data.py: Creates the database and loads the CSV data into structured tables.
 - analysis/analysis.py: Performs all analysis such as summary tables, statistical comparisons, subset analysis, and generates output CSVs and plots.
 - dashboard/dashboard_app.py: Reads the output files and presents them interactively in Streamlit.
-- Snakefile: Orchestrates the full pipeline with Snakemake, ensuring all steps run reproducibly with make pipeline
+- Snakefile: Orchestrates the full pipeline with Snakemake, ensuring all steps run reproducibly with `make pipeline`
 
 This structure ensures that computation and visualization are separate, outputs are reproducible, and the project can scale to handle additional analyses or new dashboard features without disrupting existing functionality.
