@@ -41,8 +41,7 @@ To start the Streamlit dashboard:
 make dashboard
 ```
 
-Then open a browser and go to:
-http://localhost:8501
+After running `make dashboard`, open the forwarded URL provided by Streamlit (e.g., `http://localhost:8501`) in your browser.
 
 The dashboard provides interactive access to:
 
@@ -90,7 +89,7 @@ Scalability Considerations:
 The schema would scale effectively if the dataset grew to include hundreds of projects and thousands of samples. New data could be added by just inserting additional rows without needing schema changes. Some other analytics that would be good to perform include longitudinal analyses to track how immune cell populations change over time within the same patient, because the time_from_treatment_start field enables timepoint comparisons. Cohort based analyses such as filtering by condition, treatment, or sample type, would also be useful for identifying trends across specific patient groups. Predictive modeling could also be performed using the cell population data to identify features associated with treatment response, since the structured format allows easy extraction of features for machine learning. If more cell types or measurements were introduced, the schema could be extended to support more flexible data structures, enabling even more advanced analyses in the future.
 
 # Code Structure
-The project separates data management, analysis, and visualization to ensure clarity, reproducibility, and modularity. Each part has its own role role, making it easy to update or expand.
+The project separates data management, analysis, and visualization to ensure clarity, reproducibility, and modularity. Each part has its own role, making it easy to update or expand.
 - load_data.py: Creates the database and loads the CSV data into structured tables.
 - analysis/analysis.py: Performs all analysis such as summary tables, statistical comparisons, subset analysis, and generates output CSVs and plots.
 - dashboard/dashboard_app.py: Reads the output files and presents them interactively in Streamlit.
