@@ -54,6 +54,7 @@ The dashboard provides interactive access to:
 The relational database consists of two main tables:
 
 1. samples Table
+
 | Column | Type | Description |
 |--------|------|-------------|
 | sample_id | TEXT (Primary Key) | Unique identifier for each sample |
@@ -69,6 +70,7 @@ The relational database consists of two main tables:
 | time_from_treatment_start | INTEGER | Timepoint of sample collection |
 
 2. cell_counts Table
+
 | Column | Type | Description |
 |--------|------|-------------|
 | id | INTEGER (Primary Key) | Auto-incremented row ID |
@@ -93,4 +95,5 @@ The project separates data management, analysis, and visualization to ensure cla
 - analysis/analysis.py: Performs all analysis such as summary tables, statistical comparisons, subset analysis, and generates output CSVs and plots.
 - dashboard/dashboard_app.py: Reads the output files and presents them interactively in Streamlit.
 - Snakefile: Orchestrates the full pipeline with Snakemake, ensuring all steps run reproducibly with make pipeline
+
 This structure ensures that computation and visualization are separate, outputs are reproducible, and the project can scale to handle additional analyses or new dashboard features without disrupting existing functionality.
